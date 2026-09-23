@@ -56,6 +56,7 @@ in at least 4 of 5 tries.
 ---
 
 ## 4. Something about your chunks
+At least 4 out of 5 sampled chunks should contain a complete statement that makes sense without needing surrounding text.
 
 <!-- YOU WRITE THIS ONE.
 
@@ -72,12 +73,15 @@ in at least 4 of 5 tries.
 
 
 **Why this target:**
+<!--I chose 4 out of 5 because most chunks should make sense on their own, but I don't expect every chunk to be perfect. If a chunk is incomplete or confusing, the AI may not have enough context to give a correct answer.-->
 
 
 
 ---
 
 ## 5. Your choice
+
+Even if retreival works, you want the final answer to stay faithful to your corpus.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -90,7 +94,7 @@ in at least 4 of 5 tries.
 
 
 **Why this target:**
-
+<!--If the chunks matches to something outside of the topic, it might give the wrong answer, to mitigate the problem I added, it should be faithful to the corpus. -->
 
 
 ---
