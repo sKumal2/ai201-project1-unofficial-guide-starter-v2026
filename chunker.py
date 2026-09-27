@@ -80,25 +80,70 @@ def fallback_split(
     return chunks
 
 
+# def split_documents(documents: list[Document]) -> list[Chunk]:
+#     """
+#     Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+
+#     Right now it just calls the fallback. That is the plain, generic behaviour
+#     the brief is talking about.
+
+#     When you write your own strategy, set `produced_by` to
+#     "chunker.py::split_documents" so your README's Sample Chunks section names
+#     the right function. `app.py chunks` prints that string for you.
+
+#     Things worth thinking about before you write any code:
+#       - Are your documents short posts or long guides?
+#       - Is the useful information in one sentence, or spread over a paragraph?
+#       - Would splitting on paragraph breaks keep more thoughts intact than
+#         splitting on a character count?
+#     """
+#     return fallback_split(documents)
 def split_documents(documents: list[Document]) -> list[Chunk]:
-    """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    chunk_size = 450
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
+    chunks: list[Chunk] = []
 
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
+    for doc in documents:
+        sections = doc.text.split("\n\n")
+        current_chunk = ""
+        index = 0
 
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
-    """
-    return fallback_split(documents)
+        for section in sections:
+            section = section.strip()
 
+            if not section:
+                continue
+
+            if len(current_chunk) + len(section) + 2 <= chunk_size:
+                if current_chunk:
+                    current_chunk += "\n\n"
+                current_chunk += section
+
+            else:
+                if current_chunk:
+                    chunks.append(
+                        Chunk(
+                            text=current_chunk,
+                            source=doc.source,
+                            index=index,
+                            produced_by="chunker.py::split_documents",
+                        )
+                    )
+                    index += 1
+
+                current_chunk = section
+
+        if current_chunk:
+            chunks.append(
+                Chunk(
+                    text=current_chunk,
+                    source=doc.source,
+                    index=index,
+                    produced_by="chunker.py::split_documents",
+                )
+            )
+
+    return chunks
 
 def describe(chunks: list[Chunk]) -> str:
     """A one-line summary, printed after indexing."""
