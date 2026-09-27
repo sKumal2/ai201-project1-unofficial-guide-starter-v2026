@@ -65,3 +65,60 @@ rather than a number. Treat the default as a starting point, not an answer —
 it was set against the corpora above at their shipped chunk settings, and
 changing the chunking moves the distances underneath it. Measuring it
 yourself is the milestone.
+
+## Sample Chunks
+
+Chunk 1  |  source: thread_bike_commute.txt#0  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Is a bike worth it for a 20 minute walk commute?
+
+--- reply 1 (14 votes) ---
+Yeah. Cuts an 18 minute walk to about 6. The thing nobody mentions is storage — covered bike parking exists at three buildings and is full by 9amat all three.
+
+--- reply 2 (9 votes) ---
+Counterpoint, I sold mine. Between November and March the paths are either icy or salted and salt destroys a drivetrain in one season.
+
+======================================================================
+Chunk 2  |  source: thread_first_gen.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+--- reply 3 (16 votes) ---
+Emergency fund for textbooks and travel exists and is not means-tested beyond a short form.
+
+======================================================================
+Chunk 3  |  source: thread_laptop_specs.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+--- reply 3 (12 votes) ---
+I did two years on an 8GB machine and it was fine until the last project, at which point it very much wasn't. 16 is the answer.
+
+======================================================================
+Chunk 4  |  source: thread_office_hours_etiquette.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+--- reply 3 (18 votes) ---
+If it helps, treat it as a standing appointment. Go every week for a month and it stops feeling like a thing.
+
+======================================================================
+Chunk 5  |  source: thread_roommate_conflict.txt#0  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Roommate situation isn't working. What now?
+
+--- reply 1 (28 votes) ---
+Talk to your RA early, and frame it as 'we need help sorting this out' rather than 'move me'. Room changes are possible but the process starts with mediation and skipping that step slows it down.
+
+--- reply 2 (14 votes) ---
+Room changes happen at the semester boundary almost always, and mid-semester only in fairly serious cases.
+
+## Test Questions
+
+### In-Scope Questions
+1. What time do dining halls close on weekends?
+2. How does changing dorm rooms work?
+3. Where can students study late at night?
+4. What should students know about parking on campus?
+5. Are students required to have a meal plan?
+
+### Out-of-Scope Questions
+1. Who won the 2026 World Cup?
+2. How do I replace a car alternator?
+3. What is the capital of Mongolia?
+4. How do I bake a chocolate cake?
+5. What is the best medication for allergies?
