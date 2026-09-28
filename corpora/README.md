@@ -122,3 +122,81 @@ Room changes happen at the semester boundary almost always, and mid-semester onl
 3. What is the capital of Mongolia?
 4. How do I bake a chocolate cake?
 5. What is the best medication for allergies?
+
+
+## Milestone 4: Relevance Cutoff
+
+I tested five questions that should be answerable from the `campus_life` corpus and five questions that are clearly outside the corpus.
+
+### In-Scope Results
+
+| Question | Best Distance |
+|---|---:|
+| What time do dining halls close on weekends? | 0.3287 |
+| How does changing dorm rooms work? | 0.5102 |
+| Where can students study late at night? | 0.5500 |
+| What should students know about parking on campus? | 0.6061 |
+| Are students required to have a meal plan? | 0.5053 |
+
+### Out-of-Scope Results
+
+| Question | Best Distance |
+|---|---:|
+| Who won the 2026 World Cup? | 0.8564 |
+| How do I replace a car alternator? | 0.8825 |
+| What is the capital of Mongolia? | 0.7683 |
+| How do I bake a chocolate cake? | 0.8021 |
+| What is the best medication for allergies? | 0.8060 |
+
+The highest distance among the in-scope questions was 0.6061, while the lowest distance among the out-of-scope questions was 0.7683. This created a clear gap between the two groups.
+
+I chose a relevance cutoff of **0.68** because it falls between those values. With this cutoff, all five in-scope questions would be accepted, while all five out-of-scope questions would be rejected.
+
+The chunks are mostly on toopic, and not just few word matches. 
+The top k = 5 seems right for my retreival for now. 
+
+
+## when there is no enough information: 
+Question: Can freshmen park on campus for free?
+
+Answer using only the documents above, and name the file you used.
+======================================================================
+
+I do not have enough information to answer whether freshmen can park on campus for free.
+
+Sources retrieved: admin_parking_permits.txt, admin_wifi_and_accounts.txt, dining_verrill_street_grill.txt, money_jobs.txt, transit_shuttle.txt
+
+
+## when there is enough information: 
+Question: What are good dining halls?
+
+Answer using only the documents above, and name the file you used.
+======================================================================
+
+Based on the provided documents, Pellew Dining Hall is a good choice for its dedicated allergen-free station staffed by someone who knows the menu (*dining_pellew_dining_hall.txt*). Halden Hall is also worth going to for its soup rotation and bread baked on site (*dining_halden_hall.txt*).
+
+Sources retrieved: dining_halden_hall.txt, dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, housing_innisfree_hall.txt, housing_tamsin_court.txt
+
+## Grounding Instruction
+Question: What are good dining halls?
+
+Answer using only the documents above, and name the file you used.
+======================================================================
+
+Based on the provided documents, Pellew Dining Hall is a good choice for its dedicated allergen-free station staffed by someone who knows the menu (*dining_pellew_dining_hall.txt*). Halden Hall is also worth going to for its soup rotation and bread baked on site (*dining_halden_hall.txt*).
+
+Sources retrieved: dining_halden_hall.txt, dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, housing_innisfree_hall.txt, housing_tamsin_court.txt
+
+## Where would you put the cutoff, and what would I get wrong at that number?
+At a cutoff of 0.68, none of my five in-scope or five out-of-scope test questions were misclassified. The remaining risk is with borderline questions: a relevant question with an unusually high distance could be rejected, or an unrelated but semantically similar question could be accepted.
+
+
+## How I used AI ?
+I used AI to understand what each milestone requires us to acheive. After that, deep brainstorming and searching through the code myself, I figured out how to 
+break the solution. Later, I took some help to write some readme for my project.  
+
+Also, I asked it to tell me where would you put the cutoff, and what would I get at that number, it told me 0.68, because when I ran the function myself, and got the output threshold more than 0.6 for the chunks actually present, and 0.71 for the ones that are not. So, which is reasonable point, and I agreed to that. 
+
+# What this does?
+This project builds a RAG system, using the campus life corpus where it loads, splits into chunks, creates embeddings, and stores them in a vector db. 
+Then, when a user asks a que, the prompt is compared to the chunks we created and retreives the most relevant ones. And if the questons are not close enough to the chunks we have, relevance cutoff will reject the question and return a specific prompt. But, if the chunks are found then LLM is used to give the answers only from inside the documents we have and if not enough information is found it refuses to give answer. 
