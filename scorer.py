@@ -262,3 +262,22 @@ def score(question, answer, results, decision=None):
 # Alias in case run_eval.py expects this name.
 def score_answer(question, answer, results, decision=None):
     return score(question, answer, results, decision)
+
+def judge(question, expects, answer, results):
+    """
+    Main function expected by run_eval.py.
+
+    Returns True if the answer passes the evaluation
+    for this question, otherwise False.
+    """
+
+    # Criterion 1:
+    # retrieval should contain the information needed
+    if not retrieval_contains_answer(question, results):
+        return False
+
+    # The answer itself should also be grounded/correct
+    if not answer_is_grounded(question, answer):
+        return False
+
+    return True
